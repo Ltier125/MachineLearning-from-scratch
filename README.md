@@ -32,14 +32,6 @@
 - [ ] 实现前馈网络、残差连接与 LayerNorm
 - [ ] 组合完整 Transformer Block
 
-核心公式：
-$$
-\operatorname{Attention}(Q,K,V)
-=
-\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
-$$
-不仅读懂公式，同时解释每一步张量形状，以及梯度如何回传到参数。
-
 ## 🗺️ 学习路线
 > 仅为学习计划，不代表仓库已全部实现
 
