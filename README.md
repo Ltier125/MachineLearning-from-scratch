@@ -152,5 +152,3 @@ Python | NumPy | PyTorch
 ## ℹ️ About
 Personal learning repo. Readability and correctness come first; performance optimizations are added after verification.
 
----
-### GitHub 仓库简介（直接复制）
