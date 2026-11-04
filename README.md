@@ -27,7 +27,7 @@
 - [x] 支持 batch 输入，封装为 `nn.Module`
 - [x] 理解损失函数与反向传播
 - [x] 手动实现梯度下降，验证参数变化与损失下降
-- [ ] 完成 causal mask，验证无法读取未来信息
+- [x] 完成 causal mask，验证无法读取未来信息
 - [ ] 实现 Multi-Head Attention
 - [ ] 实现前馈网络、残差连接与 LayerNorm
 - [ ] 组合完整 Transformer Block
@@ -120,7 +120,7 @@ Working on single-head self-attention
 - [x] Batch support, wrapped as `nn.Module`
 - [x] Loss function and backpropagation
 - [x] Manual gradient descent, verify parameter & loss change
-- [ ] Causal mask implementation
+- [x] Causal mask implementation
 - [ ] Multi-Head Attention
 - [ ] Feed-forward network, residual connection, LayerNorm
 - [ ] Full Transformer Block
