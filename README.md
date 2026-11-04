@@ -125,12 +125,6 @@ Working on single-head self-attention
 - [ ] Feed-forward network, residual connection, LayerNorm
 - [ ] Full Transformer Block
 
-$$
-\operatorname{Attention}(Q,K,V)
-=
-\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
-$$
-Understand both the formula and tensor shape changes, plus gradient flow.
 
 ## 🗺️ Roadmap
 > Learning plan, not all implemented yet
