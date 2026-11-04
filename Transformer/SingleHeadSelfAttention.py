@@ -43,8 +43,17 @@ class SingleHeadSelfAttention(nn.Module):
         v = self.v_proj(x)
 
         scores = (q @ k.transpose(-2,-1)) / self.scale
-        weights = torch.softmax(scores,dim=-1)
+        # weights = torch.softmax(scores,dim=-1)
 
+        # 新增：禁止读取未来位置
+        T = x.shape[1]
+        mask = torch.triu(
+            torch.ones(T, T, dtype=torch.bool, device=x.device),
+            diagonal=1,
+        )
+        scores = scores.masked_fill(mask, float("-inf"))
+
+        weights = torch.softmax(scores, dim=-1)    
         output = weights @ v
         return output, weights
 
@@ -123,7 +132,28 @@ with torch.no_grad():
 print("更新前的损失:", loss.item())
 print("更新后的损失:", new_loss.item())
 
-scores_zero = torch.tensor([2.0, 0.0, 0.0])
-scores_masked = torch.tensor([2.0, float("-inf"), float("-inf")])
+# scores_zero = torch.tensor([2.0, 0.0, 0.0])
+# scores_masked = torch.tensor([2.0, float("-inf"), float("-inf")])
 
+with torch.no_grad():
+    output, weights = model(x)
 
+print("加上 mask 后的注意力权重：")
+print(weights[0])
+
+print("每行权重之和：")
+print(weights.sum(dim=-1))
+
+x_changed = x.clone()
+
+x_changed[:, -1, :] = torch.randn_like(x_changed[:, -1, :])
+
+with torch.no_grad():
+    original_output, _ = model(x)
+    changed_output, _ = model(x_changed)
+
+difference = (
+    original_output[:, :-1, :] - changed_output[:, :-1, :]
+).abs().max()
+
+print("前面位置输出的最大变化:", difference.item())
